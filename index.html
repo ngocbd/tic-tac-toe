@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html>
+    
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>A Tic-Tac-Toe game?</title>
+        <meta name="description" content="An interactive getting started guide for Brackets.">
+        <link rel="stylesheet" href="main.css">
+        <script src="processing.js"></script>
+        <script src="main.js"></script>
+    </head>
+    <body>
+        
+
+<canvas id="canvas1"></canvas>
+
+<script id="script1" type="text/javascript">
+
+var Board = function()
+{
+    this.x=120;
+    this.y=120;
+    this.width=399;
+    this.height=399;
+    this.matrix=[[' ',' ',' '],
+                [' ',' ',' '],
+                [' ',' ',' ']];
+    this.draw= function(processing)
+    {
+      processing.rect(this.x,this.y,this.width,this.height);
+      processing.line(this.x,this.y + this.width/3,this.width + this.x,this.height/3+this.y);
+      processing.line(this.x,this.y + this.width/3 * 2,this.width+this.x,this.height/3 * 2+this.y);
+      processing.line(this.x+this.height/3,this.y,this.width/3+this.x,this.height+this.y);
+      processing.line(this.x+this.height/3 * 2,this.y,this.width/3 * 2+this.x,this.height+this.y);
+      processing.textSize(this.width/3);
+        
+//      processing.text("X", this.x + 40, this.y + 100); 
+//      processing.text("O", this.x + 170, this.y + 100); 
+                              for(var i = 0;i<3;i++) {
+                                for(var j = 0;j<3;j++) {
+                                  if (this.matrix[i][j] != ' ') {    
+                                    if(this.matrix[i][j] == 'X') {
+                                      processing.fill(255,0,0);  
+                                    } else {
+                                      processing.fill(0,255,0);
+                                    }
+
+                                      processing.text(this.matrix[i][j], this.x + this.width/30*1.42 + i*(this.width/3), this.y + this.height/3 - this.height/30+ j*(this.height/3));
+                                      processing.fill(255,255,255);
+                                  }
+                                }
+                              }
+    
+    
+    }
+}
+
+function sketchProc(processing) {
+    processing.width=1000;
+    processing.height=1000;
+    var board = new Board();
+    var count = 0;
+    processing.mouseClicked = function() {
+        console.log(this.mouseX+","+this.mouseY);
+       
+         if (this.mouseX > board.x && this.mouseX < board.x+board.width/3 && this.mouseY > board.y && this.mouseY < board.y  + board.height/3) {
+            board.draw(processing);
+            console.log('#1');
+            if (board.matrix[0][0] == ' ') {
+              count += 1;
+             if (count % 2 == 1) {
+                 board.matrix[0][0]='O';
+             } else {
+                 board.matrix[0][0]='X';
+             }
+            }
+
+        }
+        if (this.mouseX > board.x && this.mouseX < board.x+board.width/3 && this.mouseY >     board.y + board.height/3 && this.mouseY < board.y  + board.height/3 * 2) {
+            
+            board.draw(processing);
+            console.log('#2');
+             
+            if (board.matrix[0][1] == ' ') {
+              count += 1;
+             if (count % 2 == 1) {
+                 board.matrix[0][1]='O';
+             } else {
+                 board.matrix[0][1]='X';
+             }
+            }
+        }
+        if (this.mouseX > board.x && this.mouseX < board.x+board.width/3 && this.mouseY > board.y + board.height/3 * 2&& this.mouseY < board.y  + board.height) {
+            
+            board.draw(processing);
+            console.log('#3');
+            if (board.matrix[0][2] == ' ') {
+              count += 1;
+             if (count % 2 == 1) {
+                 board.matrix[0][2]='O';
+             } else {
+                 board.matrix[0][2]='X';
+             }
+            }
+        }
+        if (this.mouseX > board.x + board.width/3 && this.mouseX < board.x+board.width/3 * 2 &&this.mouseY>board.y&&this.mouseY < board.y+board.height/3) {
+            
+            board.draw(processing);
+            console.log('#4');
+            if (board.matrix[1][0] == ' ') {
+              count += 1;
+             if (count % 2 == 1) {
+                 board.matrix[1][0]='O';
+             } else {
+                 board.matrix[1][0]='X';
+             }
+            }
+        }
+                if (this.mouseX > board.x + board.width/3 && this.mouseX < board.x+board.width/3 * 2 && this.mouseY >     board.y + board.height/3 && this.mouseY < board.y  + board.height/3 * 2) {
+           
+            board.draw(processing);
+            console.log('#5');
+            if (board.matrix[1][1] == ' ') {
+              count += 1;
+             if (count % 2 == 1) {
+                 board.matrix[1][1]='O';
+             } else {
+                 board.matrix[1][1]='X';
+             }
+            }
+        }
+                if (this.mouseX > board.x  + board.width/3&& this.mouseX < board.x+board.width/3 * 2&& this.mouseY > board.y + board.height/3 * 2&& this.mouseY < board.y  + board.height) {
+            
+            board.draw(processing);
+            console.log('#6');
+            if (board.matrix[1][2] == ' ') {
+              count += 1;
+            }
+             if (count % 2 === 1) {
+                 board.matrix[1][2]='O';
+             } else {
+                 board.matrix[1][2]='X';
+             }
+        }
+                if (this.mouseX > board.x + board.width/3 * 2&& this.mouseX < board.x+board.width &&this.mouseY>board.y&&this.mouseY < board.y+board.height/3) {
+            
+            board.draw(processing);
+            console.log('#7');
+            if (board.matrix[2][0] == ' ') {
+              count += 1;
+             if (count % 2 == 1) {
+                 board.matrix[2][0]='O';
+             } else {
+                 board.matrix[2][0]='X';
+             }
+            }
+        }
+                if (this.mouseX > board.x + board.width/3 * 2 && this.mouseX < board.x+board.width && this.mouseY >     board.y + board.height/3 && this.mouseY < board.y  + board.height/3 * 2) {
+           
+            board.draw(processing);
+            console.log('#8');
+                if (board.matrix[2][1] == ' ') {
+              count += 1;
+             if (count % 2 == 1) {
+                 board.matrix[2][1]='O';
+             } else {
+                 board.matrix[2][1]='X';
+             }
+            }
+        }
+                if (this.mouseX > board.x  + board.width/3 * 2&& this.mouseX < board.x+board.width&& this.mouseY > board.y + board.height/3 * 2&& this.mouseY < board.y  + board.height) {
+            board.draw(processing);
+            console.log('#9');
+            if (board.matrix[2][2] == ' ') {
+              count += 1;
+             if (count % 2 == 1) {
+                 board.matrix[2][2]='O';
+             } else {
+                 board.matrix[2][2]='X';
+             }
+            }
+        }
+        processing.textSize(30);
+        if (board.matrix[0][0]=='X'&&board.matrix[0][1]=='X'&&board.matrix[0][2]=='X'||
+           board.matrix[1][0]=='X'&&board.matrix[1][1]=='X'&&board.matrix[1][2]=='X'||
+           board.matrix[2][0]=='X'&&board.matrix[2][1]=='X'&&board.matrix[2][2]=='X'||
+           board.matrix[0][0]=='X'&&board.matrix[1][0]=='X'&&board.matrix[2][0]=='X'|| 
+           board.matrix[0][1]=='X'&&board.matrix[1][1]=='X'&&board.matrix[2][1]=='X'|| 
+           board.matrix[0][2]=='X'&&board.matrix[1][2]=='X'&&board.matrix[2][2]=='X'|| 
+           board.matrix[2][0]=='X'&&board.matrix[1][1]=='X'&&board.matrix[0][2]=='X'|| 
+           board.matrix[0][0]=='X'&&board.matrix[1][1]=='X'&&board.matrix[2][2]=='X'
+           ) {
+           console.log("X Win!");
+           board.matrix=[
+           [' ',' ',' '],
+           [' ',' ',' '],
+           [' ',' ',' ']
+           ];
+           count = 0;
+        } 
+        if (board.matrix[0][0]=='O'&&board.matrix[0][1]=='O'&&board.matrix[0][2]=='O'||
+           board.matrix[1][0]=='O'&&board.matrix[1][1]=='O'&&board.matrix[1][2]=='O'||
+           board.matrix[2][0]=='O'&&board.matrix[2][1]=='O'&&board.matrix[2][2]=='O'||
+           board.matrix[0][0]=='O'&&board.matrix[1][0]=='O'&&board.matrix[2][0]=='O'|| 
+           board.matrix[0][1]=='O'&&board.matrix[1][1]=='O'&&board.matrix[2][1]=='O'|| 
+           board.matrix[0][2]=='O'&&board.matrix[1][2]=='O'&&board.matrix[2][2]=='O'|| 
+           board.matrix[2][0]=='O'&&board.matrix[1][1]=='O'&&board.matrix[0][2]=='O'|| 
+           board.matrix[0][0]=='O'&&board.matrix[1][1]=='O'&&board.matrix[2][2]=='O'
+           ) {
+           console.log("O Win!");
+           board.matrix=[
+           [' ',' ',' '],
+           [' ',' ',' '],
+           [' ',' ',' ']
+           ];
+            count = 0;
+           
+        } 
+        
+    };
+       
+        //board.x=100;
+      processing.draw = function() {
+
+        board.draw(processing);
+       
+      };
+    
+    
+    
+  
+}
+
+var canvas = document.getElementById("canvas1");
+    
+// attaching the sketchProc function to the canvas
+var p = new Processing(canvas, sketchProc);
+ //p.exit(); to detach it
+</script>
+</body>
+</html>
+
